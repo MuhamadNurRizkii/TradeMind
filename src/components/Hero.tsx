@@ -24,7 +24,7 @@ function Hero() {
           menganalisis performa dalam satu dashboard yang intuitif.
         </p>
         <Link
-          href={""}
+          href={"/login"}
           className={"py-3 px-6 rounded-md bg-black text-white text-xl"}
         >
           Mulai Sekarang
