@@ -20,8 +20,8 @@ function Hero() {
         </h1>
         <p className="p-2 mt-2 mb-4 text-base md:text-lg text-text-primary text-center">
           Jurnal trading modern yang membantu Anda mencatat transaksi,
-          mengevaluasi psikologi trading, <br className="hidden md:block" /> dan menganalisis performa dalam
-          satu dashboard yang intuitif.
+          mengevaluasi psikologi trading, <br className="hidden md:block" /> dan
+          menganalisis performa dalam satu dashboard yang intuitif.
         </p>
         <Link
           href={""}
@@ -33,7 +33,7 @@ function Hero() {
       <div className="w-full py-10">
         <Image
           className="mx-auto rounded-[6px] w-full h-auto max-w-[1000px]"
-          src={"/mockup.png"}
+          src={"/dashboard.png"}
           alt="mockup"
           width={1000}
           height={400}

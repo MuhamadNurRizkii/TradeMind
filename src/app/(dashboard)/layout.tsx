@@ -24,7 +24,8 @@ export default async function Layout({
         <div className="flex h-14 md:h-16 items-center justify-between border-b px-3 md:px-4">
           <SidebarTrigger />
           <h1 className="font-semibold text-sm md:text-base truncate max-w-[60%] text-right">
-            Halo, {user.user_metadata.full_name}
+            {/* Halo, {user.user_metadata.full_name} */}
+            Halo, User
           </h1>
         </div>
 
@@ -32,5 +33,4 @@ export default async function Layout({
       </main>
     </SidebarProvider>
   );
-
 }
