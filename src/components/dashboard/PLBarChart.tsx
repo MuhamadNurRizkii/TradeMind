@@ -32,7 +32,7 @@ export function PLBarChart({ data }: { data: BarData[] }) {
           tickFormatter={(v) => `$${v}`}
         />
         <Tooltip
-          formatter={(v: number) => [`$${v.toFixed(2)}`, "Net P/L"]}
+          formatter={(v: any) => [`$${Number(v).toFixed(2)}`, "Net P/L"]}
           contentStyle={{
             borderRadius: 8,
             border: "none",

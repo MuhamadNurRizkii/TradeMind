@@ -47,7 +47,7 @@ export function EquityCurveChart({ data }: { data: EquityPoint[] }) {
           tickFormatter={(v) => `$${v}`}
         />
         <Tooltip
-          formatter={(v: number) => [`$${v.toFixed(2)}`, "Equity"]}
+          formatter={(v: any) => [`$${Number(v).toFixed(2)}`, "Equity"]}
           contentStyle={{
             borderRadius: 8,
             border: "none",

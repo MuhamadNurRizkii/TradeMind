@@ -30,7 +30,7 @@ export function WinLosePieChart({ data }: { data: PieData[] }) {
           ))}
         </Pie>
         <Tooltip
-          formatter={(v: number) => [v, "Trades"]}
+          formatter={(v: any) => [v, "Trades"]}
           contentStyle={{
             borderRadius: 8,
             border: "none",
