@@ -12,6 +12,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import PnlCalendar from "@/components/PnlCalendar";
 
 type Trade = {
   id: number;
@@ -44,6 +45,8 @@ async function DashboardPage() {
     .eq("id", user?.id)
     .single();
 
+  console.log(trades);
+
   const initialBalance: number = profileData?.initial_balance ?? 0;
 
   const allTrades: Trade[] = trades ?? [];
@@ -58,7 +61,7 @@ async function DashboardPage() {
   const netPL = allTrades.reduce(
     (sum, t) =>
       t.result === "Win" ? sum + t.profit_loss : sum - t.profit_loss,
-    0
+    0,
   );
 
   const totalBalance = initialBalance + netPL;
@@ -96,28 +99,30 @@ async function DashboardPage() {
   const now = new Date();
   const thisMonth = allTrades.filter((t) => {
     const d = new Date(t.trade_date);
-    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    return (
+      d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()
+    );
   });
   const monthlyPL = thisMonth.reduce(
     (sum, t) =>
       t.result === "Win" ? sum + t.profit_loss : sum - t.profit_loss,
-    0
+    0,
   );
 
   const statCards = [
     {
       label: "Total Balance",
       value: `$${totalBalance.toFixed(2)}`,
-      sub: initialBalance > 0
-        ? `Modal awal $${initialBalance.toFixed(2)}`
-        : "Atur modal awal di profil",
+      sub:
+        initialBalance > 0
+          ? `Modal awal $${initialBalance.toFixed(2)}`
+          : "Atur modal awal di profil",
       icon: <Wallet className="w-5 h-5" />,
       color:
         totalBalance >= initialBalance
           ? "bg-blue-600 text-white"
           : "bg-red-600 text-white",
-      iconBg:
-        totalBalance >= initialBalance ? "bg-blue-500" : "bg-red-500",
+      iconBg: totalBalance >= initialBalance ? "bg-blue-500" : "bg-red-500",
     },
     {
       label: "Total Trades",
@@ -169,7 +174,9 @@ async function DashboardPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-xl md:text-2xl font-bold text-slate-800">Dashboard</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-slate-800">
+            Dashboard
+          </h1>
           <p className="text-sm text-slate-500 mt-0.5">
             Ringkasan performa dan aktivitas trading Anda
           </p>
@@ -258,9 +265,7 @@ async function DashboardPage() {
                   Streak Saat Ini
                 </span>
                 {totalTrades === 0 ? (
-                  <span className="text-slate-400 text-sm">
-                    Belum ada data
-                  </span>
+                  <span className="text-slate-400 text-sm">Belum ada data</span>
                 ) : (
                   <div className="flex items-center gap-2">
                     <span
@@ -291,10 +296,7 @@ async function DashboardPage() {
             ) : (
               <div className="flex flex-col gap-3">
                 {topPairs.map(([pair, count], i) => (
-                  <div
-                    key={pair}
-                    className="flex items-center justify-between"
-                  >
+                  <div key={pair} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 text-xs font-bold flex items-center justify-center">
                         {i + 1}
@@ -312,6 +314,10 @@ async function DashboardPage() {
             )}
           </CardContent>
         </Card>
+      </div>
+
+      <div>
+        <PnlCalendar trades={trades} />
       </div>
 
       {/* Aktivitas Terbaru */}
